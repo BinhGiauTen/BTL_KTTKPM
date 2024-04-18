@@ -1,0 +1,45 @@
+server:
+  port: 8222
+
+eureka:
+  client:
+    register-with-eureka: false
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      mvc:
+        routes:
+          - id: bookService
+            uri: http://localhost:9000
+            predicates:
+               - Path=/api/v1/books/**
+          - id: borrowService
+            uri: http://localhost:9010
+            predicates:
+               - Path=/api/v1/borrows/**
+          - id: employeeService
+            uri: http://localhost:9020
+            predicates:
+               - Path=/api/v1/employees/**
+          - id: notificationService
+            uri: http://localhost:9030
+            predicates:
+               - Path=/api/v1/notification/**
+          - id: userService
+            uri: http://localhost:9040
+            predicates:
+               - Path=/api/v1/users/**
+     
+  config:
+    import: optional:configserver:http://localhost:8888
+  
+      
+
+    
+     
+     
