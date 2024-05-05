@@ -36,7 +36,6 @@ public class UserController {
 		return repository.findAll();
 	}
 	
-//	Get detail 
 	@GetMapping("/{id}")
 //	Let's return an object with: data, message, status
 	ResponseEntity<ResponseObject> findById(@PathVariable Long id) {
