@@ -24,7 +24,7 @@ import com.example.UserService.repositories.UserRepository;
 
 
 @RestController
-@RequestMapping(path = "api/v1/users")
+@RequestMapping(path = "users")
 public class UserController {
 	
 //	DI = Dependency injection

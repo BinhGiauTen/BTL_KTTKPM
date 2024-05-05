@@ -12,3 +12,15 @@ spring:
     name: borrowService
   config:
     import: optional:configserver:http://localhost:8888
+  datasource:
+    url: jdbc:mysql://localhost:3306/librarydb
+    username: root
+    password: sapassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
