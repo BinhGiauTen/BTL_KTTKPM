@@ -1,12 +1,12 @@
 package com.example.BorrowService.dto;
 
 public class BookRequest {
-	private String bookId;
+	private Long bookId;
     private int quantity;
-	public String getBookId() {
+	public Long getBookId() {
 		return bookId;
 	}
-	public void setBookId(String bookId) {
+	public void setBookId(Long bookId) {
 		this.bookId = bookId;
 	}
 	public int getQuantity() {
@@ -15,6 +15,6 @@ public class BookRequest {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-    
+	
     
 }
