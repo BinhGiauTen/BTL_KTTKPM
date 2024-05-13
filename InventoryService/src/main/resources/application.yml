@@ -9,6 +9,6 @@ server:
  
 spring:
   application:
-    name: employeeService
+    name: inventoryService
   config:
     import: optional:configserver:http://localhost:8888

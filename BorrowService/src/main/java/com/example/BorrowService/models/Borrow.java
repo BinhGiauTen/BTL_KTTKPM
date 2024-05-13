@@ -1,19 +1,23 @@
 package com.example.BorrowService.models;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
-public class Borrowing {
+public class Borrow {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
-    private Long bookId;
+    private String userId;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<BorrowDetail> books;
     private LocalDate borrowedDate;
     private LocalDate returnDate;
     private boolean returned;
@@ -23,17 +27,17 @@ public class Borrowing {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(Long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Long getBookId() {
-		return bookId;
+	public List<BorrowDetail> getBooks() {
+		return books;
 	}
-	public void setBookId(Long bookId) {
-		this.bookId = bookId;
+	public void setBooks(List<BorrowDetail> books) {
+		this.books = books;
 	}
 	public LocalDate getBorrowedDate() {
 		return borrowedDate;
@@ -53,26 +57,24 @@ public class Borrowing {
 	public void setReturned(boolean returned) {
 		this.returned = returned;
 	}
-	public Borrowing( Long userId, Long bookId, LocalDate borrowedDate, LocalDate returnDate,
+	public Borrow(String userId, List<BorrowDetail> books, LocalDate borrowedDate, LocalDate returnDate,
 			boolean returned) {
 		super();
 		this.userId = userId;
-		this.bookId = bookId;
+		this.books = books;
 		this.borrowedDate = borrowedDate;
 		this.returnDate = returnDate;
 		this.returned = returned;
 	}
-	public Borrowing() {
+	public Borrow() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public String toString() {
-		return "Borrowing [id=" + id + ", userId=" + userId + ", bookId=" + bookId + ", borrowedDate=" + borrowedDate
+		return "Borrow [id=" + id + ", userId=" + userId + ", books=" + books + ", borrowedDate=" + borrowedDate
 				+ ", returnDate=" + returnDate + ", returned=" + returned + "]";
 	}
-    
 	
     
-
 }
