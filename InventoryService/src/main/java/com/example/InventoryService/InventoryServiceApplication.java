@@ -28,8 +28,20 @@ public class InventoryServiceApplication {
 			inventory2.setBookId(2L);
 			inventory2.setQuantity(10);
 			
+			Inventory inventory3 = new Inventory();
+			inventory3.setId(3L);
+			inventory3.setBookId(3L);
+			inventory3.setQuantity(10);
+			
+			Inventory inventory4 = new Inventory();
+			inventory4.setId(3L);
+			inventory4.setBookId(3L);
+			inventory4.setQuantity(10);
+			
 			inventoryRepository.save(inventory);
 			inventoryRepository.save(inventory2);
+			inventoryRepository.save(inventory3);
+			inventoryRepository.save(inventory4);
 			
 		};
 	}

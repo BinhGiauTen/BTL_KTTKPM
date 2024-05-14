@@ -35,7 +35,7 @@ public class BorrowService {
 	 }
 
 	@Transactional
-    public void borrowBooks(BorrowRequest borrowRequest) {
+    public String borrowBooks(BorrowRequest borrowRequest) {
         Borrow borrow = new Borrow();
         borrow.setUserId(borrowRequest.getUserId());
         List<BorrowDetail> borrowDetailsList = new ArrayList<>();
@@ -56,7 +56,6 @@ public class BorrowService {
         		.toList();
         
         // Sending a GET request to check inventory availability
-        try {
             URI fullUri = UriComponentsBuilder.fromUriString("http://localhost:9020/api/inventory")
                     .queryParam("bookId", bookIds)
                     .build()
@@ -77,14 +76,10 @@ public class BorrowService {
                     borrow = entityManager.merge(borrow); // Re-attach đối tượng
                 }
                 borrowRepository.save(borrow);
+                return "Books borrowed successfully.";
             } else {
                 System.out.println("Inventory not available. Unable to borrow books.");
+                throw new IllegalArgumentException("Book is not in stock, please try again later");
             }
-
-        } catch (Exception e) {
-            System.err.println("Error calling inventory API: " + e.getMessage());
-        }
-        
-//        borrowRepository.save(borrow);
     }
 }
