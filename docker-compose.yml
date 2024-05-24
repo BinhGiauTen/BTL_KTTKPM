@@ -7,7 +7,7 @@ services:
     image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: sapassword
-      MYSQL_DATABASE: librarydb
+      MYSQL_DATABASE: bookdb
       MYSQL_PASSWORD: sapassword
     ports:
       - "3307:3306"
@@ -24,6 +24,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
+  ## Api Gateway
   api-gateway:
     image: api-gateway:latest
     container_name: api-gateway
@@ -52,7 +53,7 @@ services:
   
 
 
-  ## User-Service Docker Compose Config
+  ## Book-Service Docker Compose Config
   book-service:
     container_name: book-service
     image: book-service:latest
@@ -60,7 +61,7 @@ services:
       - 9000:9000
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-book:3306/librarydb
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-book:3306/bookdb
       - SPRING_DATASOURCE_USERNAME:root
       - SPRING_DATASOURCE_PASSWORD:sapassword
     depends_on:

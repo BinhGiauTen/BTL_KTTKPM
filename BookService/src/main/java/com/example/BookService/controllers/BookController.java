@@ -40,7 +40,6 @@ public class BookController {
             updatedBook.setGenre(book.getGenre());
             updatedBook.setISBN(book.getISBN());
             updatedBook.setPublishedDate(book.getPublishedDate());
-            updatedBook.setQuantity(book.getQuantity());
             bookRepository.save(updatedBook);
             return new ResponseEntity<>(updatedBook, HttpStatus.OK);
         } else {

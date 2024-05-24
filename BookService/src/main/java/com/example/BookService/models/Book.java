@@ -17,7 +17,6 @@ public class Book {
     private String genre;
     private String ISBN;
     private LocalDate publishedDate;
-    private int quantity;
 	public Long getId() {
 		return id;
 	}
@@ -54,20 +53,13 @@ public class Book {
 	public void setPublishedDate(LocalDate publishedDate) {
 		this.publishedDate = publishedDate;
 	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	public Book(String title, String author, String genre, String iSBN, LocalDate publishedDate, int quantity) {
+	public Book(String title, String author, String genre, String iSBN, LocalDate publishedDate) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.genre = genre;
 		ISBN = iSBN;
 		this.publishedDate = publishedDate;
-		this.quantity = quantity;
 	}
 	public Book() {
 		super();
@@ -76,8 +68,10 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", genre=" + genre + ", ISBN=" + ISBN
-				+ ", publishedDate=" + publishedDate + ", quantity=" + quantity + "]";
+				+ ", publishedDate=" + publishedDate + "]";
 	}
+	
+	
     
     
 
