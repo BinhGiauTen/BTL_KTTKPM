@@ -1,0 +1,69 @@
+---
+version: '3.7'
+services:
+  ## MySQL Docker Compose Config
+  mysql-book:
+    container_name: mysql-book
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: sapassword
+      MYSQL_DATABASE: librarydb
+      MYSQL_PASSWORD: sapassword
+    ports:
+      - "3307:3306"
+    restart: always
+
+
+
+  ## Eureka Server
+  discovery-server:
+    image: discovery-server:latest
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  api-gateway:
+    image: api-gateway:latest
+    container_name: api-gateway
+    ports:
+      - "8222:8222"
+    expose:
+      - "8222"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-server
+
+  ## Notification-Service Docker Compose Config
+  notification-service:
+    container_name: notification-service
+    image: notification-service:latest
+    ports:
+      - 9030:9030
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-server
+      - api-gateway
+      
+  ## User-Service Docker Compose Config
+  
+
+
+  ## User-Service Docker Compose Config
+  book-service:
+    container_name: book-service
+    image: book-service:latest
+    ports:
+      - 9000:9000
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-book:3306/librarydb
+      - SPRING_DATASOURCE_USERNAME:root
+      - SPRING_DATASOURCE_PASSWORD:sapassword
+    depends_on:
+      - discovery-server
+      - api-gateway
+      - mysql-book
