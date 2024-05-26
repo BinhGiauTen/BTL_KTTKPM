@@ -6,7 +6,7 @@ services:
     container_name: mysql-book
     image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: sapassword
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: bookdb
     ports:
       - "3307:3306"
@@ -19,7 +19,7 @@ services:
     container_name: mysql-user
     image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: sapassword
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: userdb
     ports:
       - "3308:3306"
@@ -30,7 +30,7 @@ services:
     container_name: mysql-inventory
     image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: sapassword
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: inventorydb
     ports:
       - "3309:3306"
@@ -41,7 +41,7 @@ services:
     container_name: mysql-borrow
     image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: sapassword
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: borrowdb
     ports:
       - "3310:3306"
@@ -100,7 +100,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-user:3306/userdb
       - SPRING_DATASOURCE_USERNAME:root
-      - SPRING_DATASOURCE_PASSWORD:sapassword
+      - SPRING_DATASOURCE_PASSWORD:root
     depends_on:
       - discovery-server
       - api-gateway
@@ -116,7 +116,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-inventory:3306/inventorydb
       - SPRING_DATASOURCE_USERNAME:root
-      - SPRING_DATASOURCE_PASSWORD:sapassword
+      - SPRING_DATASOURCE_PASSWORD:root
     depends_on:
       - discovery-server
       - api-gateway
@@ -132,7 +132,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-borrow:3306/borrowdb
       - SPRING_DATASOURCE_USERNAME:root
-      - SPRING_DATASOURCE_PASSWORD:sapassword
+      - SPRING_DATASOURCE_PASSWORD:root
     depends_on:
       - discovery-server
       - api-gateway
@@ -150,7 +150,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-book:3306/bookdb
       - SPRING_DATASOURCE_USERNAME:root
-      - SPRING_DATASOURCE_PASSWORD:sapassword
+      - SPRING_DATASOURCE_PASSWORD:root
       - SPRING_REDIS_HOST=redis
       - SPRING_REDIS_PORT=6379
     depends_on:

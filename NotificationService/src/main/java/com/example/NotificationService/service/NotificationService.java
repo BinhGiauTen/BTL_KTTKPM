@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NotificationService {
-    private RateLimiter rateLimiter = RateLimiter.create(0.2); // Giới hạn 2 yêu cầu mỗi 10 giây
+    private RateLimiter rateLimiter = RateLimiter.create(0.08330); // Giới hạn 5 yêu cầu mỗi 60 giây : 5/60 = 0.08330
 
     public boolean tryAcquire() {
         return rateLimiter.tryAcquire();
