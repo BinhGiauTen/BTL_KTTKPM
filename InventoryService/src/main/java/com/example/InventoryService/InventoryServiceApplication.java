@@ -34,8 +34,8 @@ public class InventoryServiceApplication {
 			inventory3.setQuantity(10);
 			
 			Inventory inventory4 = new Inventory();
-			inventory4.setId(3L);
-			inventory4.setBookId(3L);
+			inventory4.setId(4L);
+			inventory4.setBookId(4L);
 			inventory4.setQuantity(10);
 			
 			inventoryRepository.save(inventory);

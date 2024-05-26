@@ -2,6 +2,9 @@ package com.example.BookService.Service;
 
 import com.example.BookService.models.Book;
 import com.example.BookService.repositories.BookRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +21,8 @@ public class BookService {
         return bookRepository.findById(id).orElse(null);
     }
 
+//    public List<Book> getAllBooks() {
+//        return  bookRepository.findAll();
+//    }
     // Thêm các phương thức khác theo nhu cầu
 }

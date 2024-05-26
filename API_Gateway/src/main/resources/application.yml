@@ -19,7 +19,7 @@ spring:
           - id: bookService
             uri: http://localhost:9000
             predicates:
-               - Path=/books/**
+               - Path=/api/books/**
           - id: borrowService
             uri: http://localhost:9010
             predicates:
@@ -38,7 +38,7 @@ spring:
                - Path=/users/**
      
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:instead
   
       
 

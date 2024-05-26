@@ -100,7 +100,6 @@ public class Book {
 	private String title;
 	private String author;
 	private String isbn;
-	}
 
 	public Book(Long id, String title, String author, String isbn) {
 		this.id = id;
@@ -108,40 +107,10 @@ public class Book {
 		this.author = author;
 		this.isbn = isbn;
   }
-	public String getGenre() {
-		return genre;
-	}
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-	public String getISBN() {
-		return ISBN;
-	}
-	public void setISBN(String iSBN) {
-		ISBN = iSBN;
-	}
-	public LocalDate getPublishedDate() {
-		return publishedDate;
-	}
-	public void setPublishedDate(LocalDate publishedDate) {
-		this.publishedDate = publishedDate;
-	}
-	public Book(String title, String author, String genre, String iSBN, LocalDate publishedDate) {
-		super();
-		this.title = title;
-		this.author = author;
-		this.genre = genre;
-		ISBN = iSBN;
-		this.publishedDate = publishedDate;
-	}
+
 	public Book() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	@Override
-	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", genre=" + genre + ", ISBN=" + ISBN
-				+ ", publishedDate=" + publishedDate + "]";
 	}
 
 }

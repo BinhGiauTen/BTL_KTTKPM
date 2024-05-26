@@ -2,10 +2,13 @@ package com.example.InventoryService.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.InventoryService.dto.InventoryResponse;
+import com.example.InventoryService.models.Inventory;
 import com.example.InventoryService.service.InventoryService;
+
 
 import java.util.List;
 
@@ -27,5 +30,10 @@ public class InventoryController {
     @ResponseStatus(HttpStatus.OK)
     public List<InventoryResponse> isInStock(@RequestParam List<Long> bookId) {
         return inventoryService.isInStock(bookId);
+    }
+    
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Inventory>> getAllInventory () {
+        return new ResponseEntity<>(inventoryService.getAllInventoryes(), HttpStatus.OK);
     }
 }

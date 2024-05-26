@@ -8,13 +8,54 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: sapassword
       MYSQL_DATABASE: bookdb
-      MYSQL_PASSWORD: sapassword
     ports:
       - "3307:3306"
     restart: always
+    
+  
+    
+  ## MySQL Docker Compose Config for UserDB
+  mysql-user:
+    container_name: mysql-user
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: sapassword
+      MYSQL_DATABASE: userdb
+    ports:
+      - "3308:3306"
+    restart: always
 
+  ## MySQL Docker Compose Config for InventoryDB
+  mysql-inventory:
+    container_name: mysql-inventory
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: sapassword
+      MYSQL_DATABASE: inventorydb
+    ports:
+      - "3309:3306"
+    restart: always
 
-
+  ## MySQL Docker Compose Config for BorrowDB
+  mysql-borrow:
+    container_name: mysql-borrow
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: sapassword
+      MYSQL_DATABASE: borrowdb
+    ports:
+      - "3310:3306"
+    restart: always
+    
+  ## Redis Service
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    
+    
   ## Eureka Server
   discovery-server:
     image: discovery-server:latest
@@ -50,7 +91,53 @@ services:
       - api-gateway
       
   ## User-Service Docker Compose Config
-  
+  user-service:
+    container_name: user-service
+    image: user-service:latest
+    ports:
+      - 9040:9040
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-user:3306/userdb
+      - SPRING_DATASOURCE_USERNAME:root
+      - SPRING_DATASOURCE_PASSWORD:sapassword
+    depends_on:
+      - discovery-server
+      - api-gateway
+      - mysql-user
+      
+  ## User-Service Docker Compose Config
+  inventory-service:
+    container_name: inventory-service
+    image: inventory-service:latest
+    ports:
+      - 9020:9020
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-inventory:3306/inventorydb
+      - SPRING_DATASOURCE_USERNAME:root
+      - SPRING_DATASOURCE_PASSWORD:sapassword
+    depends_on:
+      - discovery-server
+      - api-gateway
+      - mysql-inventory
+      
+  ## User-Service Docker Compose Config
+  borrow-service:
+    container_name: borrow-service
+    image: borrow-service:latest
+    ports:
+      - 9010:9010
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-borrow:3306/borrowdb
+      - SPRING_DATASOURCE_USERNAME:root
+      - SPRING_DATASOURCE_PASSWORD:sapassword
+    depends_on:
+      - discovery-server
+      - api-gateway
+      - mysql-borrow
+      - inventory-service
 
 
   ## Book-Service Docker Compose Config
@@ -64,7 +151,10 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-book:3306/bookdb
       - SPRING_DATASOURCE_USERNAME:root
       - SPRING_DATASOURCE_PASSWORD:sapassword
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
     depends_on:
       - discovery-server
       - api-gateway
       - mysql-book
+      - redis

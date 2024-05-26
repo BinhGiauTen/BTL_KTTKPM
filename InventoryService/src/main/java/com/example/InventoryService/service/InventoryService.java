@@ -38,5 +38,9 @@ public class InventoryService {
             throw new RuntimeException("Error processing request");
         }
     }
+    
+    public List<Inventory> getAllInventoryes() {
+        return inventoryRepository.findAll();
+    }
 }
 

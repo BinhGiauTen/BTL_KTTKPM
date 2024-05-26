@@ -1,37 +1,36 @@
 package com.example.BookService;
 
-import java.time.LocalDate;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import com.example.BookService.models.Book;
 import com.example.BookService.repositories.BookRepository;
 
 
 @SpringBootApplication
-public class BookServiceApplication implements CommandLineRunner{
+public class BookServiceApplication{
 	
-	@Autowired
-    private BookRepository repository;
-
 	public static void main(String[] args) {
 		SpringApplication.run(BookServiceApplication.class, args);
 	}
 	
-	@Override
-	public void run(String... args) throws Exception {
-		Book book1 = new Book("Tieng Anh 3", "Nguyen Van A", "SGK", "1234567890", LocalDate.of(2020, 1, 1));
-        Book book2 = new Book("Nobody's Boy", "Hector Malot", "Novel", "0987654321", LocalDate.of(1878, 1, 1));
-        Book book3 = new Book("Sherlock Holmes", "Arthur Conan Doyle", "Mystery", "1122334455", LocalDate.of(1887, 1, 1));
-        Book book4 = new Book("Hercule Poirot", "Agatha Christie", "Mystery", "5566778899", LocalDate.of(1920, 1, 1));
+//	@Bean
+//	public CommandLineRunner loadData (BookRepository repository) {
+//		return args -> {
+//			Book book1 = new Book(1L, "Tieng Anh 1", "Nguyen Van Nam", "1 3949 293");
+//			Book book2 = new Book(2L, "Tieng Anh 2", "Nguyen Van Nam", "9 3293 293");
+//			Book book3 = new Book(3L, "TVTH", "Tran Van Bao", "1 324 3223");
+//			Book book4 = new Book(4L, "CNM", "Pham Van Hai", "1 230483 294");
+//			
+//			repository.save(book1);
+//			repository.save(book2);
+//			repository.save(book3);
+//			repository.save(book4);
+//		};
+//	}
 
-        repository.save(book1);
-        repository.save(book2);
-        repository.save(book3);
-        repository.save(book4);
-    }
+	
 
 }
